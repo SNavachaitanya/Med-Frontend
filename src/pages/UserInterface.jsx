@@ -192,6 +192,33 @@ const Dashboard = () => {
     setShowMedicationForm(true);
   };
 
+  const handleEmergencyCall = async () => {
+    const userId = localStorage.getItem("userId"); // Get the logged-in user's ID
+
+    try {
+      // Fetch the family doctor's number from the backend
+      const response = await fetch(
+        `https://med-backend-75az.onrender.com/userem/${userId}`
+      );
+
+      if (response.ok) {
+        const userData = await response.json();
+        const familyDoctorNumber = userData.familyDoctorNumber;
+
+        if (familyDoctorNumber) {
+          // Initiate the call
+          window.location.href = `tel:${familyDoctorNumber}`;
+        } else {
+          alert("Family doctor's number is not available.");
+        }
+      } else {
+        alert("Failed to fetch family doctor's number.");
+      }
+    } catch (error) {
+      console.error("Error fetching family doctor's number:", error);
+      alert("An error occurred while fetching family doctor's number.");
+    }
+  };
   const handleLogout = () => {
     localStorage.removeItem("token"); // If stored in sessionStorage, replace with sessionStorage.removeItem("token")
     window.location.href = "/"; // Redirect to login page
@@ -228,7 +255,16 @@ const Dashboard = () => {
           </Menu>
         </Toolbar>
       </AppBar>
-
+      <Box textAlign="center" mt={3}>
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={handleEmergencyCall}
+          sx={{ mt: 2 }}
+        >
+          Emergency Call
+        </Button>
+      </Box>
       {!showMedicationForm ? (
         <Box textAlign="center" mt={3}>
           <Typography variant="h5">Manage Your Medications</Typography>
