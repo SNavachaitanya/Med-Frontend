@@ -13,6 +13,7 @@ export default {
             'twitter': '#1DA1F2',
             'purple': '#8B46FF',
             'blue': '#1E90FF',
+            'dark-blue': '#003366',
         
         },
 
