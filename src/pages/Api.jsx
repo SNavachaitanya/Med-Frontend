@@ -12,9 +12,9 @@ function GeminiInReact({ handleChat }) {
   );
 
   const sampleQuestions = [
-    "What does AYUSH stand for?",
-    "Explain the different systems under AYUSH?",
-    "How does the AYUSH Portal support startups?",
+    "How do medicine reminder apps help patients?",
+    // "Explain the different systems under AYUSH?",
+    // "How does the AYUSH Portal support startups?,
   ];
 
   useEffect(() => {
